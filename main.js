@@ -4,19 +4,26 @@ const mobileMenu = document.querySelector('.mobile-menu')
 const MenuIcon = document.querySelector('.menu')
 const carritoCompras = document.querySelector('.navbar-shopping-cart')
 const productDetail = document.querySelector('.product-detail')
-
+const productDetailReally = document.querySelector('.product-detail-really')
 const cardsContainer = document.querySelector('.cards-container')
+const ProductDetailClose = document.querySelector('.product-detail-close')
 
 
 email.addEventListener('click', ()=>{
     if (!productDetail.classList.contains('inactive')) {
         productDetail.classList.add('inactive');
     }
+    if (!productDetailReally.classList.contains('inactive')){
+        productDetailReally.classList.add('inactive');
+    }
     desktopMenu.classList.toggle('inactive');
 })
 MenuIcon.addEventListener('click', ()=>{
     if (!productDetail.classList.contains('inactive')) {
         productDetail.classList.add('inactive');
+    }
+    if (!productDetailReally.classList.contains('inactive')){
+        productDetailReally.classList.add('inactive');
     }
     mobileMenu.classList.toggle('inactive');
 })
@@ -26,17 +33,31 @@ carritoCompras.addEventListener('click', ()=>{
     }
     if (!desktopMenu.classList.contains('inactive')){
         desktopMenu.classList.add('inactive');
-
+    }
+    if (!productDetailReally.classList.contains('inactive')){
+        productDetailReally.classList.add('inactive');
     }
     productDetail.classList.toggle('inactive');
 
 })
-
+ProductDetailClose.addEventListener('click',()=>{
+    productDetailReally.classList.add('inactive')
+})
 
 const productList = [];
 productList.push({
     name: 'bike',
     price: 120,
+    img: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+})
+productList.push({
+    name: 'Celular',
+    price: 6000,
+    img: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+})
+productList.push({
+    name: 'Celular',
+    price: 6000,
     img: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
 })
 productList.push({
@@ -52,6 +73,16 @@ const renderProducts = (arr) =>{
     
         const img= document.createElement('img')
         img.setAttribute('src',product.img)
+
+        img.addEventListener('click',()=>{
+            if (!desktopMenu.classList.contains('inactive')){
+                desktopMenu.classList.add('inactive');
+            }
+            if (!productDetail.classList.contains('inactive')) {
+                productDetail.classList.add('inactive');
+            }
+            productDetailReally.classList.remove('inactive')
+        })
     
         const productInfo = document.createElement('div')
         productInfo.classList.add('product-info')
@@ -84,4 +115,5 @@ const renderProducts = (arr) =>{
 }
 
 renderProducts(productList)
+
 
